@@ -3,6 +3,7 @@ using System;
 using AuctionService.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AuctionService.Data.Migrations
 {
     [DbContext(typeof(AuctionDbContext))]
-    partial class AuctionDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240203230056_fixTableNames")]
+    partial class fixTableNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,9 +30,6 @@ namespace AuctionService.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("AuctionEnd")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
